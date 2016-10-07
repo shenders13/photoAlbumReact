@@ -1,0 +1,11 @@
+TODO LIST:
+
+1. set up event listener on ImageTableEntryView that listens for click event and invokes this.model.changeImage()
+
+2. set up listener in AppModel that will set
+currentImage to the new image
+
+3. set up listener in AppView that listens for change to currentImage. When a change is detected it we need to call ImagePanelView.setImage()  (once we make Image Panel View)
+
+
+
