@@ -2,18 +2,26 @@ var ImageTableView = Backbone.View.extend({
 
   tagName: 'table',
 
-  initialize: function() {
-    this.render();
+  initialize: function(params) {
+    // this.set('currentImage', params.currentImage)
+    this.setImage(params.currentImage);
+    // this.setImage(params.currentImage)
   },
 
-  render: function() {
+  setImage: function(currentImage) {
+    this.currentImage = currentImage;
+    this.render(currentImage);
+  },
+
+  render: function(currentImage) {
     // to preserve event handlers on child nodes, we must call .detach() on them before overwriting with .html()
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
     this.$el.html('<th class="photo-albulm-title">Album</th>').append(
       this.collection.map(function(image) {
-        return new ImageTableEntryView({model: image}).render();
+        var match = image.toJSON().url === currentImage.toJSON().url;
+        return new ImageTableEntryView({model: image, bold: match}).render({model: image, bold: match});
       })
     );
   }

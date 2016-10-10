@@ -33,3 +33,7 @@ table {
   font-weight: 100;
   font-family: Helvetica;
 }
+
+.bold {
+  font-weight: bold;
+}

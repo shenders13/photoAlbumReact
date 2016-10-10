@@ -4,13 +4,25 @@ var ImageTableEntryView = Backbone.View.extend({
 
   template: _.template('<td class="image_table_entry_row"><span class="title"><%= title %></span></td>'),
 
+  templateBold: _.template('<td class="image_table_entry_row bold"><span class="title"><%= title %></span></td>'),
+
+
   events: {
     'click' : function() {
       this.model.changeImage();
     }
   },
 
-  render: function() {
+  initialize: function(params) {
+    this.render(params)
+  },
+
+  render: function(params) {
+
+    var state = params.bold;
+    if (state) {
+      return this.$el.html(this.templateBold(this.model.attributes));
+    }
     return this.$el.html(this.template(this.model.attributes));
   }
 
