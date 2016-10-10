@@ -4,7 +4,6 @@ var AppModel = Backbone.Model.extend({
 
     // params refers to an instance of ImageCollection
     params.photocollection.on('changeImage', function(image) {
-      console.log('image passed into set currentImage function', image);
       this.set('currentImage', image)
     }, this);
 

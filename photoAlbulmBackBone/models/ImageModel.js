@@ -6,6 +6,7 @@ var ImageModel = Backbone.Model.extend({
 
   changeImage: function() {
     this.trigger('changeImage', this);
+    this.trigger('changeFont', this);
   }
 
 });
