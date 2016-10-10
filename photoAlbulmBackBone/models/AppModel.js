@@ -4,7 +4,7 @@ var AppModel = Backbone.Model.extend({
 
     // params refers to an instance of ImageCollection
     params.photocollection.on('[INSERT COLLECTION METHOD]', function(image) {
-      this.set('currentImage', song)
+      this.set('currentImage', image)
     }, this);
 
   }

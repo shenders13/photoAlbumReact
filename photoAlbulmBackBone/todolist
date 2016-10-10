@@ -7,5 +7,7 @@ currentImage to the new image
 
 3. set up listener in AppView that listens for change to currentImage. When a change is detected it we need to call ImagePanelView.setImage()  (once we make Image Panel View)
 
+4. 
+
 
 
