@@ -1,5 +1,35 @@
 .image_table_entry_row {
   width: 100%;
-  color: blue;
-  height:50px;
+  color: #b5b5b5;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 100;
+  font-family: Helvetica;
+}
+
+.image_table_entry_row:hover {
+  cursor: pointer;
+}
+
+.image-panel {
+  float: right;
+  width: 50%;
+  border-radius:10px;
+}
+
+table {
+  float: left;
+  width: 49%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.title {
+  padding-left:10px;
+}
+
+.photo-albulm-title {
+  font-size: 50px;
+  font-weight: 100;
+  font-family: Helvetica;
 }

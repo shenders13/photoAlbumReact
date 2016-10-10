@@ -1,11 +1,14 @@
 var AppModel = Backbone.Model.extend({
   initialize: function(params){
-    this.set('currentImage', new ImageModel());
+    // console.log('imageData: ', imageData);
 
     // params refers to an instance of ImageCollection
-    params.photocollection.on('[INSERT COLLECTION METHOD]', function(image) {
+    params.photocollection.on('changeImage', function(image) {
+      console.log('image passed into set currentImage function', image);
       this.set('currentImage', image)
     }, this);
+
+    var firstImage = imageData[0];
 
   }
 });
