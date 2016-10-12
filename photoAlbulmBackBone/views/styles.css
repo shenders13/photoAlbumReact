@@ -14,14 +14,15 @@
 .image-panel {
   float: right;
   width: 50%;
-  border-radius:10px;
+  height: 50%;
+  display: inline;
 }
 
 table {
   float: left;
-  width: 49%;
+  width: 50%;
   border: 1px solid black;
-  border-radius: 10px;
+  display: inline;
 }
 
 .title {
@@ -29,11 +30,51 @@ table {
 }
 
 .photo-albulm-title {
+  padding-bottom: 30px;
+  padding-top: 30px;
   font-size: 50px;
   font-weight: 100;
+  text-align: center;
   font-family: Helvetica;
 }
 
 .bold {
   font-weight: bold;
+}
+
+.rating {
+  display: inline;
+  float: right;
+  border: solid 1px black;
+  margin-top:20px;
+  padding: 8px 30px 5px 26px;
+}
+
+.rating-number {
+  font-size: 20px;
+}
+
+.rating-number-digit {
+  font-size: 40px;
+}
+
+select#soflow, select#soflow-color {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 140px;
 }

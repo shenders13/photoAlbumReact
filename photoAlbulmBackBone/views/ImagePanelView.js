@@ -16,7 +16,10 @@ var ImagePanelView = Backbone.View.extend({
   },
 
   render: function() {
-    return this.$el.attr('src', this.model ? this.model.get('url') : '')
+    this.$el.attr('src', this.model ? this.model.get('url') : '');
+    this.$el.addClass('col-xs-6')
+    return this;
   }
 
 })
+

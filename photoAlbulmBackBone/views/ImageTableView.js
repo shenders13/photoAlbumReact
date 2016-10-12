@@ -18,12 +18,12 @@ var ImageTableView = Backbone.View.extend({
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
-    this.$el.html('<th class="photo-albulm-title">Album</th>').append(
+    this.$el.append(
       this.collection.map(function(image) {
         var match = image.toJSON().url === currentImage.toJSON().url;
         return new ImageTableEntryView({model: image, bold: match}).render({model: image, bold: match});
       })
-    );
+    ).addClass('col-xs-6');
   }
 
 })

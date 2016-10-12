@@ -19,8 +19,8 @@ var ImageTableEntryView = Backbone.View.extend({
 
   render: function(params) {
 
-    var state = params.bold;
-    if (state) {
+    var selected = params.bold;
+    if (selected) {
       return this.$el.html(this.templateBold(this.model.attributes));
     }
     return this.$el.html(this.template(this.model.attributes));
@@ -28,23 +28,3 @@ var ImageTableEntryView = Backbone.View.extend({
 
 })
 
-// var ImagePanelView = Backbone.View.extend({
-
-//   el: '<img class="image-panel">',
-
-//   initialize: function() {
-//     var firstImage = imageData[0];
-//     this.model = new ImageModel(firstImage);
-//     this.render();
-//   },
-
-//   setImage: function(image) {
-//     this.model = image;
-//     this.render();
-//   },
-
-//   render: function() {
-//     return this.$el.attr('src', this.model ? this.model.get('url') : '')
-//   }
-
-// })

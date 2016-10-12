@@ -9,11 +9,14 @@
     <script src="../models/ImageModel.js"></script>
     <script src="../collections/ImageCollection.js"></script>
     <script src="../models/AppModel.js"></script>
+    <script src="ImageRatingView.js"></script>
     <script src="ImagePanelView.js"></script>
     <script src="ImageTableView.js"></script>
     <script src="ImageTableEntryView.js"></script>
     <script src="AppView.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <div class='container'><div class="photo-albulm-title">Album</div>
     <script>
         var photocollection = new ImageCollection(imageData);
         var app = new AppModel ({photocollection: photocollection})
@@ -22,7 +25,7 @@
             var appView = new AppView({model: app});
 
             // put the view onto the screen
-            $('body').append(appView.render());
+            $('.container').append(appView.render());
     </script>
   </body>
 </html>
