@@ -1,6 +1,6 @@
 var ImageRatingView = Backbone.View.extend({
 
-  template: _.template('<div class="rating"><center><span class="rating-number-digit"><%= rating %></span><br><span class="rating-number">Rating</span></center><select id="soflow" name="cars"><option selected>rate<option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>'),
+  template: _.template('<div class="rating"><center><span class="rating-number-digit"><%= rating %></span><br><span class="rating-number"><%=title%></span></center><select id="soflow" name="cars"><option selected>rate<option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>'),
 
   events: {
     "change #soflow": function(event) {
