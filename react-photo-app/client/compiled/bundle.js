@@ -83,10 +83,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	if (typeof window !== 'undefined') {
-	  window.React = _react2.default;
-	}
-	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 	
@@ -110,6 +106,11 @@
 	      });
 	    }
 	  }, {
+	    key: 'addImage',
+	    value: function addImage(image) {
+	      console.log('inside add image function: ', image);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -118,7 +119,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-12' },
-	          _react2.default.createElement(_fields2.default, { text: 'Fields Text' })
+	          _react2.default.createElement(_fields2.default, { addImage: this.addImage.bind(this) })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -22118,17 +22119,26 @@
 	  _createClass(Fields, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log('props in Fields component: ', this.props.addImage);
+	      var context = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image' }),
-	        _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE' }),
-	        _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING' }),
 	        _react2.default.createElement(
-	          'button',
-	          { type: 'submit', className: 'btn btn-primary sub-btn' },
-	          ' Submit'
+	          'form',
+	          { onSubmit: function onSubmit(event) {
+	              event.preventDefault();context.props.addImage(this.refs);
+	            } },
+	          _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image', ref: 'url' }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE', ref: 'title' }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING', ref: 'rating' }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'btn btn-primary sub-btn' },
+	            ' Submit'
+	          )
 	        )
 	      );
 	    }
@@ -22172,7 +22182,7 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_imageList2.default, { list: props.imageList, changeImage: props.changeImage }),
-	    _react2.default.createElement(_favourites2.default, { list: props.imageList }),
+	    _react2.default.createElement(_favourites2.default, { list: props.imageList, changeImage: props.changeImage }),
 	    _react2.default.createElement('br', null)
 	  );
 	};
@@ -22203,7 +22213,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var imageList = function imageList(props) {
-	  console.log('props in ImageList: ', props);
 	  return _react2.default.createElement(
 	    'div',
 	    null,
@@ -22241,7 +22250,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var imageListEntry = function imageListEntry(props) {
-	  console.log('props in ImageListEntry: ', props);
 	  return _react2.default.createElement(
 	    'div',
 	    null,
@@ -22288,7 +22296,7 @@
 	
 	  var generateList = function generateList() {
 	    return props.list.map(function (image) {
-	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image }) : '';
+	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage }) : '';
 	    });
 	  };
 	  return _react2.default.createElement(

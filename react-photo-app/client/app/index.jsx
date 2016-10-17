@@ -5,9 +5,6 @@ import Fields from './fields.jsx';
 import ImageInfo from './imageInfo.jsx';
 import ImagePanel from './imagePanel.jsx';
 
-if (typeof window !== 'undefined') {
-    window.React = React;
-}
 
 class App extends React.Component {
 
@@ -25,11 +22,15 @@ class App extends React.Component {
     });
   }
 
+  addImage(image){
+    console.log('inside add image function: ', image);
+  }
+
   render() {
     return (
       <div className='container'>
         <div className='col-xs-12'>
-          <Fields text='Fields Text'/>
+          <Fields addImage={this.addImage.bind(this)}/>
         </div>
         <div className='col-xs-6'>
           <ImageInfo

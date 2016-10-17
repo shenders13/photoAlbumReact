@@ -5,7 +5,7 @@ var Favourites = function(props) {
 
   var generateList = function () {
     return props.list.map((image) => 
-      (image.rating > 3) ? <ImageListEntry image={image} /> : ''
+      (image.rating > 3) ? <ImageListEntry image={image} changeImage={props.changeImage}/> : ''
     )
   };
   return (

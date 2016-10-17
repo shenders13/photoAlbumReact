@@ -7,7 +7,7 @@ var imageInfo = function(props) {
   return (
     <div>
       <ImageList list={props.imageList} changeImage={props.changeImage} />
-      <Favourites list={props.imageList} />
+      <Favourites list={props.imageList} changeImage={props.changeImage}/>
       <br />
     </div>
   )
