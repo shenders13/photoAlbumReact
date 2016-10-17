@@ -27,7 +27,8 @@ class App extends React.Component {
     var prevId = imageList[imageList.length-1].id;
     imageList.push({id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating})
     this.setState({
-      imageList: imageList
+      imageList: imageList,
+      currentImage: imageList[imageList.length-1]
     });
   }
 

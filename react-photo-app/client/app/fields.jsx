@@ -53,7 +53,6 @@ export default class Fields extends React.Component {
           function(event){
             event.preventDefault();
             context.props.addImage({
-              
               url: context.state.newURL, 
               title: context.state.newTitle, 
               rating: context.state.rating

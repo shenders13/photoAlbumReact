@@ -112,7 +112,8 @@
 	      var prevId = imageList[imageList.length - 1].id;
 	      imageList.push({ id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating });
 	      this.setState({
-	        imageList: imageList
+	        imageList: imageList,
+	        currentImage: imageList[imageList.length - 1]
 	      });
 	    }
 	  }, {
@@ -22178,7 +22179,6 @@
 	          { onSubmit: function onSubmit(event) {
 	              event.preventDefault();
 	              context.props.addImage({
-	
 	                url: context.state.newURL,
 	                title: context.state.newTitle,
 	                rating: context.state.rating
@@ -22273,7 +22273,9 @@
 	    _react2.default.createElement(
 	      'p',
 	      { className: 'photos-header' },
-	      'Album'
+	      'Album (',
+	      props.list.length,
+	      ')'
 	    ),
 	    props.list.map(function (image, i) {
 	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i });
