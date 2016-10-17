@@ -4,8 +4,8 @@ import ImageListEntry from './imageListEntry.jsx';
 var Favourites = function(props) {
 
   var generateList = function () {
-    return props.list.map((image) => 
-      (image.rating > 3) ? <ImageListEntry image={image} changeImage={props.changeImage}/> : ''
+    return props.list.map((image, i) => 
+      (image.rating > 3) ? <ImageListEntry image={image} changeImage={props.changeImage} key={i}/> : ''
     )
   };
   return (

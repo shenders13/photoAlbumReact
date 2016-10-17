@@ -107,8 +107,27 @@
 	    }
 	  }, {
 	    key: 'addImage',
-	    value: function addImage(image) {
-	      console.log('inside add image function: ', image);
+	    value: function addImage(imageObj) {
+	      console.log('inside add image function: ', imageObj);
+	      console.log('this.state.imageList inside of addImage: ', this.state.imageList);
+	      var prevId = window.data.imageList[imageList.length - 1].id;
+	      var newImg = {
+	        id: prevId + 1,
+	        url: imageObj.url,
+	        title: imageObj.title,
+	        rating: imageObj.rating
+	      };
+	      this.state.imageList.push(newImg);
+	      window.data = this.state.imageList;
+	      console.log('this.state.imageList after adding: ', this.state.imageList);
+	      // this.setState(imageObj)({
+	      //   imageList: window.data.push({
+	      //     id:5, 
+	      //     url:imageObj.url,
+	      //     title: imageObj.title,
+	      //     rating: imageObj.rating
+	      //   })
+	      // });
 	    }
 	  }, {
 	    key: 'render',
@@ -22107,21 +22126,63 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// add state to Fields
+	// Fields state params are: url, title and rating
+	// set onChange listeners for three fields
+	// automatically change Fields state depending on what is typed
+	// place onSubmit handler on form called 'addImage'
+	// addImage should input state variables
+	// define addImage method in App component
+	// feed addImage as props from App down to Fields
+	// Debug
+	
 	var Fields = function (_React$Component) {
 	  _inherits(Fields, _React$Component);
 	
-	  function Fields() {
+	  function Fields(props) {
 	    _classCallCheck(this, Fields);
 	
-	    return _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).call(this, props));
+	
+	    _this.state = {
+	      newURL: '',
+	      newTitle: '',
+	      newRating: ''
+	    };
+	    _this.changeURL = _this.changeURL.bind(_this);
+	    _this.changeTitle = _this.changeTitle.bind(_this);
+	    _this.changeRating = _this.changeRating.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Fields, [{
+	    key: 'changeURL',
+	    value: function changeURL(event) {
+	      var url = event.target.value;
+	      this.setState({
+	        newURL: url
+	      });
+	    }
+	  }, {
+	    key: 'changeTitle',
+	    value: function changeTitle(event) {
+	      var title = event.target.value;
+	      this.setState({
+	        newTitle: title
+	      });
+	    }
+	  }, {
+	    key: 'changeRating',
+	    value: function changeRating(event) {
+	      var rating = event.target.value;
+	      this.setState({
+	        newRating: rating
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log('props in Fields component: ', this.props.addImage);
 	      var context = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -22129,11 +22190,17 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: function onSubmit(event) {
-	              event.preventDefault();context.props.addImage(this.refs);
+	              event.preventDefault();
+	              console.log('"this" inside onSubmit Handler: ', this);
+	              this.props.addImage({
+	                url: context.state.newURL,
+	                title: context.state.newTitle,
+	                rating: context.state.rating
+	              });
 	            } },
-	          _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image', ref: 'url' }),
-	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE', ref: 'title' }),
-	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING', ref: 'rating' }),
+	          _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image', onChange: this.changeURL }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE', onChange: this.changeTitle }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING', onChange: this.changeRating }),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit', className: 'btn btn-primary sub-btn' },
@@ -22222,8 +22289,8 @@
 	      { className: 'photos-header' },
 	      'Album'
 	    ),
-	    props.list.map(function (image) {
-	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage });
+	    props.list.map(function (image, i) {
+	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i });
 	    })
 	  );
 	};
@@ -22295,8 +22362,8 @@
 	var Favourites = function Favourites(props) {
 	
 	  var generateList = function generateList() {
-	    return props.list.map(function (image) {
-	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage }) : '';
+	    return props.list.map(function (image, i) {
+	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i }) : '';
 	    });
 	  };
 	  return _react2.default.createElement(

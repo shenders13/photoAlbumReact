@@ -22,8 +22,27 @@ class App extends React.Component {
     });
   }
 
-  addImage(image){
-    console.log('inside add image function: ', image);
+  addImage(imageObj){
+    console.log('inside add image function: ', imageObj);
+    console.log('this.state.imageList inside of addImage: ', this.state.imageList);
+    var prevId = window.data.imageList[imageList.length-1].id
+    var newImg = {
+        id: prevId + 1, 
+        url: imageObj.url,
+        title: imageObj.title,
+        rating: imageObj.rating
+    }
+    this.state.imageList.push(newImg);
+    window.data = this.state.imageList;
+    console.log('this.state.imageList after adding: ', this.state.imageList);
+    // this.setState(imageObj)({
+    //   imageList: window.data.push({
+    //     id:5, 
+    //     url:imageObj.url,
+    //     title: imageObj.title,
+    //     rating: imageObj.rating
+    //   })
+    // });
   }
 
   render() {

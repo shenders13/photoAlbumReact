@@ -7,8 +7,8 @@ var imageList = function(props) {
     <div>
       <hr />
       <p className='photos-header'>Album</p>
-      {props.list.map((image) => 
-        <ImageListEntry image={image} changeImage={props.changeImage} /> 
+      {props.list.map((image, i) => 
+        <ImageListEntry image={image} changeImage={props.changeImage} key={i} /> 
       )}
     </div> 
   )
