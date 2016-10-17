@@ -52,8 +52,8 @@ export default class Fields extends React.Component {
         <form onSubmit={
           function(event){
             event.preventDefault();
-            console.log('"context.props" inside onSubmit Handler: ', context.props); 
             context.props.addImage({
+              
               url: context.state.newURL, 
               title: context.state.newTitle, 
               rating: context.state.rating
