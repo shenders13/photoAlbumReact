@@ -52,16 +52,20 @@ export default class Fields extends React.Component {
         <form onSubmit={
           function(event){
             event.preventDefault();
+            console.log('1: context is: ', context.state);
             context.props.addImage({
               url: context.state.newURL, 
               title: context.state.newTitle, 
               rating: context.state.rating
-            })
+            });
+            context.refs.url.value = null;
+            context.refs.title.value = null;
+            context.refs.rating.value = null;
           }
         }>
-          <input className='url-input' type='text' placeholder='Enter URL of new image' onChange={this.changeURL}/>
-          <input className='url-input second-input' type='text' placeholder='Enter TITLE' onChange={this.changeTitle}/>
-          <input className='url-input second-input' type='text' placeholder='Enter RATING' onChange={this.changeRating}/>
+          <input className='url-input' type='text' placeholder='Enter URL of new image' onChange={this.changeURL} ref='url'/>
+          <input className='url-input second-input' type='text' placeholder='Enter TITLE' onChange={this.changeTitle} ref='title'/>
+          <input className='url-input second-input' type='text' placeholder='Enter RATING' onChange={this.changeRating} ref='rating'/>
           <button type='submit' className='btn btn-primary sub-btn'> Submit</button>
         </form>
       </div>

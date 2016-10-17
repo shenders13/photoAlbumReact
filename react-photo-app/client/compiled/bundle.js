@@ -22178,15 +22178,19 @@
 	          'form',
 	          { onSubmit: function onSubmit(event) {
 	              event.preventDefault();
+	              console.log('1: context is: ', context.state);
 	              context.props.addImage({
 	                url: context.state.newURL,
 	                title: context.state.newTitle,
 	                rating: context.state.rating
 	              });
+	              context.refs.url.value = null;
+	              context.refs.title.value = null;
+	              context.refs.rating.value = null;
 	            } },
-	          _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image', onChange: this.changeURL }),
-	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE', onChange: this.changeTitle }),
-	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING', onChange: this.changeRating }),
+	          _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image', onChange: this.changeURL, ref: 'url' }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE', onChange: this.changeTitle, ref: 'title' }),
+	          _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING', onChange: this.changeRating, ref: 'rating' }),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit', className: 'btn btn-primary sub-btn' },
