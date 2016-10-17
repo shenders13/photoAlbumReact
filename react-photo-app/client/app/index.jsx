@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   addImage(imageObj){
+    console.log('imageObj in App component: ', imageObj);
     var imageList = this.state.imageList;
     var prevId = imageList[imageList.length-1].id;
     imageList.push({id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating})

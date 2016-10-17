@@ -108,6 +108,7 @@
 	  }, {
 	    key: 'addImage',
 	    value: function addImage(imageObj) {
+	      console.log('imageObj in App component: ', imageObj);
 	      var imageList = this.state.imageList;
 	      var prevId = imageList[imageList.length - 1].id;
 	      imageList.push({ id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating });
@@ -22182,7 +22183,7 @@
 	              context.props.addImage({
 	                url: context.state.newURL,
 	                title: context.state.newTitle,
-	                rating: context.state.rating
+	                rating: context.state.newRating
 	              });
 	              context.refs.url.value = null;
 	              context.refs.title.value = null;

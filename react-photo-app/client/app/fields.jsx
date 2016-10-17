@@ -56,7 +56,7 @@ export default class Fields extends React.Component {
             context.props.addImage({
               url: context.state.newURL, 
               title: context.state.newTitle, 
-              rating: context.state.rating
+              rating: context.state.newRating
             });
             context.refs.url.value = null;
             context.refs.title.value = null;
