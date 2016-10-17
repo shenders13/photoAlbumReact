@@ -63,6 +63,18 @@
 	
 	var _hello2 = _interopRequireDefault(_hello);
 	
+	var _fields = __webpack_require__(/*! ./fields.jsx */ 173);
+	
+	var _fields2 = _interopRequireDefault(_fields);
+	
+	var _imageInfo = __webpack_require__(/*! ./imageInfo.jsx */ 174);
+	
+	var _imageInfo2 = _interopRequireDefault(_imageInfo);
+	
+	var _imagePanel = __webpack_require__(/*! ./imagePanel.jsx */ 178);
+	
+	var _imagePanel2 = _interopRequireDefault(_imagePanel);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71,13 +83,23 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	if (typeof window !== 'undefined') {
+	  window.React = _react2.default;
+	}
+	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 	
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 	
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	
+	    _this.state = {
+	      imageList: window.data,
+	      currentImage: window.data[0]
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(App, [{
@@ -85,12 +107,26 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_hello2.default, { text: 'Hello World, passed in as props to the HW component.' }),
+	        { className: 'container' },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          ' App Component!'
+	          'div',
+	          { className: 'col-xs-12' },
+	          _react2.default.createElement(_fields2.default, { text: 'Fields Text' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-6' },
+	          _react2.default.createElement(_imageInfo2.default, {
+	            imageList: this.state.imageList,
+	            currentImage: this.state.currentImage
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-6' },
+	          _react2.default.createElement(_imagePanel2.default, {
+	            currentImage: this.state.currentImage
+	          })
 	        )
 	      );
 	    }
@@ -22034,6 +22070,337 @@
 	
 	exports.default = HelloWorld;
 	;
+
+/***/ },
+/* 173 */
+/*!*******************************!*\
+  !*** ./client/app/fields.jsx ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Fields = function (_React$Component) {
+	  _inherits(Fields, _React$Component);
+	
+	  function Fields() {
+	    _classCallCheck(this, Fields);
+	
+	    return _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).apply(this, arguments));
+	  }
+	
+	  _createClass(Fields, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image' }),
+	        _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE' }),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', className: 'btn btn-primary sub-btn' },
+	          ' Submit'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Fields;
+	}(_react2.default.Component);
+	
+	exports.default = Fields;
+	;
+
+/***/ },
+/* 174 */
+/*!**********************************!*\
+  !*** ./client/app/imageInfo.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _imageList = __webpack_require__(/*! ./imageList.jsx */ 175);
+	
+	var _imageList2 = _interopRequireDefault(_imageList);
+	
+	var _favourites = __webpack_require__(/*! ./favourites.jsx */ 177);
+	
+	var _favourites2 = _interopRequireDefault(_favourites);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imageInfo = function imageInfo(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_imageList2.default, { list: props.imageList }),
+	    _react2.default.createElement(_favourites2.default, { list: props.imageList }),
+	    _react2.default.createElement('br', null)
+	  );
+	};
+	
+	exports.default = imageInfo;
+
+/***/ },
+/* 175 */
+/*!**********************************!*\
+  !*** ./client/app/imageList.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _imageListEntry = __webpack_require__(/*! ./imageListEntry.jsx */ 176);
+	
+	var _imageListEntry2 = _interopRequireDefault(_imageListEntry);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imageList = function imageList(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'photos-header' },
+	      'Album'
+	    ),
+	    props.list.map(function (image) {
+	      return _react2.default.createElement(_imageListEntry2.default, { image: image });
+	    })
+	  );
+	};
+	
+	exports.default = imageList;
+
+/***/ },
+/* 176 */
+/*!***************************************!*\
+  !*** ./client/app/imageListEntry.jsx ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imageListEntry = function imageListEntry(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'image-row' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'image-title' },
+	        props.image.title
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = imageListEntry;
+
+/***/ },
+/* 177 */
+/*!***********************************!*\
+  !*** ./client/app/favourites.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _imageListEntry = __webpack_require__(/*! ./imageListEntry.jsx */ 176);
+	
+	var _imageListEntry2 = _interopRequireDefault(_imageListEntry);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Favourites = function Favourites(props) {
+	
+	  var generateList = function generateList() {
+	    return props.list.map(function (image) {
+	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image }) : '';
+	    });
+	  };
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'photos-header' },
+	      'Favourites'
+	    ),
+	    generateList()
+	  );
+	};
+	
+	exports.default = Favourites;
+
+/***/ },
+/* 178 */
+/*!***********************************!*\
+  !*** ./client/app/imagePanel.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _imageDisplay = __webpack_require__(/*! ./imageDisplay.jsx */ 179);
+	
+	var _imageDisplay2 = _interopRequireDefault(_imageDisplay);
+	
+	var _imageFooter = __webpack_require__(/*! ./imageFooter.jsx */ 180);
+	
+	var _imageFooter2 = _interopRequireDefault(_imageFooter);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imagePanel = function imagePanel(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_imageDisplay2.default, { currentImage: props.currentImage }),
+	    _react2.default.createElement(_imageFooter2.default, { currentImage: props.currentImage })
+	  );
+	};
+	
+	exports.default = imagePanel;
+
+/***/ },
+/* 179 */
+/*!*************************************!*\
+  !*** ./client/app/imageDisplay.jsx ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imageDisplay = function imageDisplay(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'photos-header' },
+	      'Photo'
+	    ),
+	    _react2.default.createElement('img', { src: props.currentImage.url, className: 'image-display' })
+	  );
+	};
+	
+	exports.default = imageDisplay;
+
+/***/ },
+/* 180 */
+/*!************************************!*\
+  !*** ./client/app/imageFooter.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var imageFooter = function imageFooter(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('hr', null),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'photos-header centre' },
+	      ' Rating: ',
+	      props.currentImage.rating,
+	      ' '
+	    )
+	  );
+	};
+	
+	exports.default = imageFooter;
 
 /***/ }
 /******/ ]);
