@@ -103,6 +103,13 @@
 	  }
 	
 	  _createClass(App, [{
+	    key: 'changeImage',
+	    value: function changeImage(image) {
+	      this.setState({
+	        currentImage: image
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -118,7 +125,8 @@
 	          { className: 'col-xs-6' },
 	          _react2.default.createElement(_imageInfo2.default, {
 	            imageList: this.state.imageList,
-	            currentImage: this.state.currentImage
+	            currentImage: this.state.currentImage,
+	            changeImage: this.changeImage.bind(this)
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -22116,6 +22124,7 @@
 	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement('input', { className: 'url-input', type: 'text', placeholder: 'Enter URL of new image' }),
 	        _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter TITLE' }),
+	        _react2.default.createElement('input', { className: 'url-input second-input', type: 'text', placeholder: 'Enter RATING' }),
 	        _react2.default.createElement(
 	          'button',
 	          { type: 'submit', className: 'btn btn-primary sub-btn' },
@@ -22162,7 +22171,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_imageList2.default, { list: props.imageList }),
+	    _react2.default.createElement(_imageList2.default, { list: props.imageList, changeImage: props.changeImage }),
 	    _react2.default.createElement(_favourites2.default, { list: props.imageList }),
 	    _react2.default.createElement('br', null)
 	  );
@@ -22194,6 +22203,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var imageList = function imageList(props) {
+	  console.log('props in ImageList: ', props);
 	  return _react2.default.createElement(
 	    'div',
 	    null,
@@ -22204,7 +22214,7 @@
 	      'Album'
 	    ),
 	    props.list.map(function (image) {
-	      return _react2.default.createElement(_imageListEntry2.default, { image: image });
+	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage });
 	    })
 	  );
 	};
@@ -22231,12 +22241,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var imageListEntry = function imageListEntry(props) {
+	  console.log('props in ImageListEntry: ', props);
 	  return _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'image-row' },
+	      { className: 'image-row', onClick: function onClick() {
+	          props.changeImage(props.image);
+	        } },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'image-title' },
@@ -22358,7 +22371,7 @@
 	    _react2.default.createElement(
 	      'p',
 	      { className: 'photos-header' },
-	      'Photo'
+	      props.currentImage.title
 	    ),
 	    _react2.default.createElement('img', { src: props.currentImage.url, className: 'image-display' })
 	  );

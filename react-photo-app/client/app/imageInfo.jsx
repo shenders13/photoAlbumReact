@@ -6,7 +6,7 @@ import Favourites from './favourites.jsx'
 var imageInfo = function(props) {
   return (
     <div>
-      <ImageList list={props.imageList} />
+      <ImageList list={props.imageList} changeImage={props.changeImage} />
       <Favourites list={props.imageList} />
       <br />
     </div>

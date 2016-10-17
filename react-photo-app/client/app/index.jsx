@@ -19,6 +19,12 @@ class App extends React.Component {
     };
   }
 
+  changeImage(image) {
+    this.setState({
+      currentImage: image
+    });
+  }
+
   render() {
     return (
       <div className='container'>
@@ -29,6 +35,7 @@ class App extends React.Component {
           <ImageInfo
             imageList={this.state.imageList} 
             currentImage={this.state.currentImage}
+            changeImage={this.changeImage.bind(this)}
           />
         </div>
         <div className='col-xs-6'>
