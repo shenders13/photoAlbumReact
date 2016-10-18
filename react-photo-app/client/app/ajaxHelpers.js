@@ -26,6 +26,26 @@ var postImage = function(image, callback) {
   });
 };
 
-var ajaxHelpers = {getImages: getImages, postImage: postImage};
+var destroyRequest = function(image, callback) {
+  console.log('destroyRequest is being called! data: ', image);
+  var imageId = image.id;
+  $.ajax({
+    url: "http://localhost:8080/image",
+    type: 'DELETE',
+    data: image,
+    success: function(image) {
+      callback(image);
+    },
+    error: function(error) {
+      console.error('Failed to delete image: ', error);
+    }
+  });
+};
+
+var ajaxHelpers = {
+  getImages: getImages, 
+  postImage: postImage,
+  destroyRequest: destroyRequest
+};
 
 export default ajaxHelpers;

@@ -40,9 +40,7 @@ class App extends React.Component {
   }
 
   deleteImage(imageObj) {
-    console.log('Inside deleteImage function: ', imageObj)
     var imageList = this.state.imageList;
-    console.log('state before change: ', this.state.imageList);
     for (var i = 0; i < imageList.length; i++) {
       if (imageList[i].id === imageObj.id) {
         imageList.splice(i, 1);
@@ -51,8 +49,9 @@ class App extends React.Component {
     this.setState({
       imageList: imageList,
       currentImage: imageList[imageList.length-1]
-    }, function() {
-      console.log('state after change: ', this.state.imageList);
+    });
+    ajaxHelpers.destroyRequest(imageObj, function() {
+      console.log('image successfully removed!');
     });
   }
 

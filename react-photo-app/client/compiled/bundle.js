@@ -129,9 +129,7 @@
 	  }, {
 	    key: 'deleteImage',
 	    value: function deleteImage(imageObj) {
-	      console.log('Inside deleteImage function: ', imageObj);
 	      var imageList = this.state.imageList;
-	      console.log('state before change: ', this.state.imageList);
 	      for (var i = 0; i < imageList.length; i++) {
 	        if (imageList[i].id === imageObj.id) {
 	          imageList.splice(i, 1);
@@ -140,8 +138,9 @@
 	      this.setState({
 	        imageList: imageList,
 	        currentImage: imageList[imageList.length - 1]
-	      }, function () {
-	        console.log('state after change: ', this.state.imageList);
+	      });
+	      _ajaxHelpers2.default.destroyRequest(imageObj, function () {
+	        console.log('image successfully removed!');
 	      });
 	    }
 	  }, {
@@ -22564,7 +22563,27 @@
 	  });
 	};
 	
-	var ajaxHelpers = { getImages: getImages, postImage: postImage };
+	var destroyRequest = function destroyRequest(image, callback) {
+	  console.log('destroyRequest is being called! data: ', image);
+	  var imageId = image.id;
+	  $.ajax({
+	    url: "http://localhost:8080/image",
+	    type: 'DELETE',
+	    data: image,
+	    success: function success(image) {
+	      callback(image);
+	    },
+	    error: function error(_error3) {
+	      console.error('Failed to delete image: ', _error3);
+	    }
+	  });
+	};
+	
+	var ajaxHelpers = {
+	  getImages: getImages,
+	  postImage: postImage,
+	  destroyRequest: destroyRequest
+	};
 	
 	exports.default = ajaxHelpers;
 
