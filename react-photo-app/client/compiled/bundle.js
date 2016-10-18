@@ -22397,7 +22397,7 @@
 	
 	  var generateList = function generateList() {
 	    return props.list.map(function (image, i) {
-	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i }) : '';
+	      return image.rating > 3 ? _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i, deleteImage: props.deleteImage }) : '';
 	    });
 	  };
 	  return _react2.default.createElement(
