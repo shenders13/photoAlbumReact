@@ -4,15 +4,16 @@ import HelloWorld from './hello.jsx';
 import Fields from './fields.jsx';
 import ImageInfo from './imageInfo.jsx';
 import ImagePanel from './imagePanel.jsx';
-
+import ajaxHelpers from './ajaxHelpers.js';
 
 class App extends React.Component {
 
   constructor(props) {
+    console.log('props passed into App Component: ', props)
     super(props);
     this.state = {
-      imageList: window.data,
-      currentImage: window.data[0]
+      imageList: props.imageData,
+      currentImage: props.imageData[0]
     };
   }
 
@@ -23,13 +24,19 @@ class App extends React.Component {
   }
 
   addImage(imageObj){
-    console.log('imageObj in App component: ', imageObj);
     var imageList = this.state.imageList;
     var prevId = imageList[imageList.length-1].id;
-    imageList.push({id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating})
+    var newImg = {id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating};
+
+    //update state (imageList, currentImage) directly
+    imageList.push(newImg);
     this.setState({
       imageList: imageList,
       currentImage: imageList[imageList.length-1]
+    });
+
+    // POST new image to the server
+    ajaxHelpers.postImage(newImg, function(image) {
     });
   }
 
@@ -56,5 +63,6 @@ class App extends React.Component {
   }
 }
 
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ajaxHelpers.getImages(function(images) {
+  ReactDOM.render(<App imageData={images}/>, document.getElementById('app'));
+});

@@ -1,5 +1,7 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 var app = express();
+app.use(bodyParser());
 
 var imageData = [
   {
@@ -39,6 +41,13 @@ app.use('/', express.static('../client'));
 app.get('/images', function (req, res) {
   console.log('received get request');
   res.send(imageData);
+});
+
+app.post('/image', function (req, res) {
+  console.log('received post request: ', req.body);
+  var newImg = req.body;
+  imageData.push(newImg);
+  res.send(newImg);
 });
 
 app.listen(8080, function () {

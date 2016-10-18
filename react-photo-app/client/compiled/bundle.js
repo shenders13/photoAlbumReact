@@ -75,6 +75,10 @@
 	
 	var _imagePanel2 = _interopRequireDefault(_imagePanel);
 	
+	var _ajaxHelpers = __webpack_require__(/*! ./ajaxHelpers.js */ 181);
+	
+	var _ajaxHelpers2 = _interopRequireDefault(_ajaxHelpers);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -89,11 +93,13 @@
 	  function App(props) {
 	    _classCallCheck(this, App);
 	
+	    console.log('props passed into App Component: ', props);
+	
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 	    _this.state = {
-	      imageList: window.data,
-	      currentImage: window.data[0]
+	      imageList: props.imageData,
+	      currentImage: props.imageData[0]
 	    };
 	    return _this;
 	  }
@@ -108,14 +114,19 @@
 	  }, {
 	    key: 'addImage',
 	    value: function addImage(imageObj) {
-	      console.log('imageObj in App component: ', imageObj);
 	      var imageList = this.state.imageList;
 	      var prevId = imageList[imageList.length - 1].id;
-	      imageList.push({ id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating });
+	      var newImg = { id: prevId + 1, url: imageObj.url, title: imageObj.title, rating: imageObj.rating };
+	
+	      //update state (imageList, currentImage) directly
+	      imageList.push(newImg);
 	      this.setState({
 	        imageList: imageList,
 	        currentImage: imageList[imageList.length - 1]
 	      });
+	
+	      // POST new image to the server
+	      _ajaxHelpers2.default.postImage(newImg, function (image) {});
 	    }
 	  }, {
 	    key: 'render',
@@ -151,7 +162,9 @@
 	  return App;
 	}(_react2.default.Component);
 	
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	_ajaxHelpers2.default.getImages(function (images) {
+	  _reactDom2.default.render(_react2.default.createElement(App, { imageData: images }), document.getElementById('app'));
+	});
 
 /***/ },
 /* 1 */
@@ -22482,6 +22495,50 @@
 	};
 	
 	exports.default = imageFooter;
+
+/***/ },
+/* 181 */
+/*!***********************************!*\
+  !*** ./client/app/ajaxHelpers.js ***!
+  \***********************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var getImages = function getImages(callback) {
+	  $.ajax({
+	    url: 'http://localhost:8080/images',
+	    type: 'GET',
+	    success: function success(data) {
+	      return callback(data);
+	    },
+	    error: function error(_error) {
+	      console.error('ajax GET request failed: ', _error);
+	    }
+	  });
+	};
+	
+	var postImage = function postImage(image, callback) {
+	  console.log('postImage is being called! data: ', image);
+	  $.post({
+	    url: "http://localhost:8080/image",
+	    data: image,
+	    success: function success(image) {
+	      callback(image);
+	    },
+	    error: function error(_error2) {
+	      console.error('Failed to post new image: ', _error2);
+	      callback(_error2);
+	    }
+	  });
+	};
+	
+	var ajaxHelpers = { getImages: getImages, postImage: postImage };
+	
+	exports.default = ajaxHelpers;
 
 /***/ }
 /******/ ]);
