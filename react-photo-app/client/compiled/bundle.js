@@ -93,8 +93,6 @@
 	  function App(props) {
 	    _classCallCheck(this, App);
 	
-	    console.log('props passed into App Component: ', props);
-	
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 	    _this.state = {
@@ -129,6 +127,24 @@
 	      _ajaxHelpers2.default.postImage(newImg, function (image) {});
 	    }
 	  }, {
+	    key: 'deleteImage',
+	    value: function deleteImage(imageObj) {
+	      console.log('Inside deleteImage function: ', imageObj);
+	      var imageList = this.state.imageList;
+	      console.log('state before change: ', this.state.imageList);
+	      for (var i = 0; i < imageList.length; i++) {
+	        if (imageList[i].id === imageObj.id) {
+	          imageList.splice(i, 1);
+	        }
+	      }
+	      this.setState({
+	        imageList: imageList,
+	        currentImage: imageList[imageList.length - 1]
+	      }, function () {
+	        console.log('state after change: ', this.state.imageList);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -145,7 +161,8 @@
 	          _react2.default.createElement(_imageInfo2.default, {
 	            imageList: this.state.imageList,
 	            currentImage: this.state.currentImage,
-	            changeImage: this.changeImage.bind(this)
+	            changeImage: this.changeImage.bind(this),
+	            deleteImage: this.deleteImage.bind(this)
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -22252,8 +22269,8 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_imageList2.default, { list: props.imageList, changeImage: props.changeImage }),
-	    _react2.default.createElement(_favourites2.default, { list: props.imageList, changeImage: props.changeImage }),
+	    _react2.default.createElement(_imageList2.default, { list: props.imageList, changeImage: props.changeImage, deleteImage: props.deleteImage }),
+	    _react2.default.createElement(_favourites2.default, { list: props.imageList, changeImage: props.changeImage, deleteImage: props.deleteImage }),
 	    _react2.default.createElement('br', null)
 	  );
 	};
@@ -22296,7 +22313,7 @@
 	      ')'
 	    ),
 	    props.list.map(function (image, i) {
-	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, key: i });
+	      return _react2.default.createElement(_imageListEntry2.default, { image: image, changeImage: props.changeImage, deleteImage: props.deleteImage, key: i });
 	    })
 	  );
 	};
@@ -22333,8 +22350,19 @@
 	        } },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'image-title' },
-	        props.image.title
+	        { className: 'col-xs-10' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'image-title' },
+	          props.image.title
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-2' },
+	        _react2.default.createElement('img', { className: 'trash-can', src: 'http://downloadicons.net/sites/default/files/trash-icon-47886.png', onClick: function onClick() {
+	            props.deleteImage(props.image);
+	          } })
 	      )
 	    )
 	  );

@@ -9,7 +9,6 @@ import ajaxHelpers from './ajaxHelpers.js';
 class App extends React.Component {
 
   constructor(props) {
-    console.log('props passed into App Component: ', props)
     super(props);
     this.state = {
       imageList: props.imageData,
@@ -40,6 +39,23 @@ class App extends React.Component {
     });
   }
 
+  deleteImage(imageObj) {
+    console.log('Inside deleteImage function: ', imageObj)
+    var imageList = this.state.imageList;
+    console.log('state before change: ', this.state.imageList);
+    for (var i = 0; i < imageList.length; i++) {
+      if (imageList[i].id === imageObj.id) {
+        imageList.splice(i, 1);
+      }
+    }
+    this.setState({
+      imageList: imageList,
+      currentImage: imageList[imageList.length-1]
+    }, function() {
+      console.log('state after change: ', this.state.imageList);
+    });
+  }
+
   render() {
     return (
       <div className='container'>
@@ -51,6 +67,7 @@ class App extends React.Component {
             imageList={this.state.imageList} 
             currentImage={this.state.currentImage}
             changeImage={this.changeImage.bind(this)}
+            deleteImage={this.deleteImage.bind(this)}
           />
         </div>
         <div className='col-xs-6'>

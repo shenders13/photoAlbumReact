@@ -6,6 +6,11 @@
   padding-left: 10px;
 }
 
+.trash-can {
+  width: 17px;
+  margin-top: 25px;
+}
+
 .image-row {
   width: 100%;
   background-color: #d8d8d8;
